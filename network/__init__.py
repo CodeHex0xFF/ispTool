@@ -171,6 +171,7 @@ class UdpServerThread(socketserver.ThreadingMixIn, UdpServer):
     pass
 
 
+# Need Report functions
 class NetWork:
     __config__: NetWorkCFG
     __handle__ = None
@@ -230,20 +231,19 @@ class NetWork:
             self.__server__.serve_forever()
 
 
-def one(data) -> tuple[bool, bytes]:
-    return False, "hello".encode()
-
-
-def two(data) -> tuple[bool, bytes]:
-    return False, "world".encode()
-
-
-def set_common(cfg: NetWorkCommon):
-    cfg.set_callHeartBeat(two)
-
-
-# NOTE: example
 if __name__ == "__main__":
+
+    def one(data) -> tuple[bool, bytes]:
+        return False, "hello".encode()
+
+    def two(data) -> tuple[bool, bytes]:
+        return False, "world".encode()
+
+    def set_common(cfg: NetWorkCommon):
+        cfg.set_callHeartBeat(two)
+
+    # NOTE: example
+    # TODO: all params can override
     commonCfg = NetWorkCommon()
     instanceNetwork = NetWork(
         NetWorkCFG("127.0.0.1", 40000, NetWorkTransType.TCP, NetWorkWorkType.SERVER),

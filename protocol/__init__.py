@@ -354,6 +354,37 @@ class IspProtocol(Structure):
     __devNumber__ = 0
     __stationNumber__ = 0
     __deserdesOK__ = False
+    __mcpFlag__ = 3
+    __mcpCMDflag__ = 3
+    __mcpACKflag__ = 4
+    __cmdFlag__ = 2
+    __pduFlagList__: list
+    __vp_ackFlag__ = 0
+    __packetsNumber__ = 0
+    __start__ = 0x7E
+    __end__ = 0x7E
+
+    def setMCPflag(self, mcp: int):
+        self.__mcpFlag__ = mcp
+
+    def setMCPcmdFlag(self, cmd: int):
+        self.__mcpCMDflag__ = cmd
+
+    def setMCPackFlag(self, ack: int):
+        self.__mcpACKflag__ = ack
+
+    # all the pdu para will switch 2 bytes
+    def setPduFlagList(self, pdu: list):
+        self.__pduFlagList__ = pdu
+
+    def setVPackFlag(self, vpFlag: int):
+        self.__vp_ackFlag__ = vpFlag
+
+    def setStartFlag(self, start: int):
+        self.__start__ = start
+
+    def setEndFlag(self, end: int):
+        self.__end__ = end
 
     def deserdes(self, msg: bytes) -> bool:
         if msg[0] != 0x7E or msg[-1] != 0x7E:
