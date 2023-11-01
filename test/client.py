@@ -6,7 +6,7 @@ from socket import *
 
 sk = socket()
 
-sk.connect(("127.0.0.1", 9977))
+sk.connect(("127.0.0.1", 40000))
 while 1:
     sk.settimeout(50)
 
@@ -16,6 +16,6 @@ while 1:
     if s == "bye":
         break
 
-    print(sk.recv(1024).decode())
+    print(f"{sk.recv(4096)}")
 
 sk.close()
